@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESONATE — String Physics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <!-- Air distortion filter — hero only -->
+  <svg style="position:fixed;top:0;left:0;width:0;height:0" aria-hidden="true">
+    <defs>
+      <filter id="air-distort" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+        <feTurbulence id="fe-turb" type="turbulence" baseFrequency="0.013 0.019" numOctaves="3" seed="11" result="noise"/>
+        <feDisplacementMap id="fe-disp" in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <div id="cursor" aria-hidden="true"></div>
+
+  <!-- ════════════════════════════════════════
+       01 — RESONATE  (balanced)
+  ════════════════════════════════════════ -->
+  <section class="s-section" id="s1">
+    <canvas class="s-canvas" aria-hidden="true"></canvas>
+    <div class="hero-center" id="hero-text">
+      <p id="eyebrow">— String Physics —</p>
+      <h1 id="headline">RESONATE</h1>
+      <p id="subline">Drag across any string to play it.</p>
+    </div>
+    <div class="s-bottom">
+      <div class="s-identity">
+        <span class="s-num">(01) — Balanced</span>
+        <span class="s-desc" style="margin-top:.2rem">Musical guitar feel · scroll to compare</span>
+      </div>
+      <div class="params">
+        <div class="params-label">— parameters —</div>
+        <div class="p-row"><span class="p-key">TENSION</span>   <span class="p-val" style="color:#f0eeea">0.45</span>  <span class="p-note">wave propagation speed</span></div>
+        <div class="p-row"><span class="p-key">DAMPING</span>   <span class="p-val" style="color:#f0eeea">0.9982</span><span class="p-note">energy retained / frame</span></div>
+        <div class="p-row"><span class="p-key">AMPLITUDE</span> <span class="p-val" style="color:#f0eeea">26 px</span> <span class="p-note">max pluck displacement</span></div>
+        <div class="p-row"><span class="p-key">PLK WIDTH</span> <span class="p-val" style="color:#f0eeea">0.18</span>  <span class="p-note">triangle fraction of string</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       02 — SLACK  (loose bass string)
+  ════════════════════════════════════════ -->
+  <section class="s-section" id="s2">
+    <canvas class="s-canvas" aria-hidden="true"></canvas>
+    <div class="s-bottom">
+      <div class="s-identity">
+        <span class="s-num">(02) — Loose</span>
+        <h2 class="s-name" style="color:rgb(205,162,76)">SLACK</h2>
+        <span class="s-desc">Low tension bass string — slow deep wave, long resonance</span>
+      </div>
+      <div class="params">
+        <div class="params-label">— parameters —</div>
+        <div class="p-row"><span class="p-key">TENSION</span>   <span class="p-val" style="color:rgb(205,162,76)">0.12</span>  <span class="p-note">↓ slow wave travel</span></div>
+        <div class="p-row"><span class="p-key">DAMPING</span>   <span class="p-val" style="color:rgb(205,162,76)">0.9993</span><span class="p-note">↑ rings much longer</span></div>
+        <div class="p-row"><span class="p-key">AMPLITUDE</span> <span class="p-val" style="color:rgb(205,162,76)">40 px</span> <span class="p-note">↑ wide displacement arc</span></div>
+        <div class="p-row"><span class="p-key">PLK WIDTH</span> <span class="p-val" style="color:rgb(205,162,76)">0.38</span>  <span class="p-note">↑ fundamental dominates</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       03 — STEEL  (tight, snappy)
+  ════════════════════════════════════════ -->
+  <section class="s-section" id="s3">
+    <canvas class="s-canvas" aria-hidden="true"></canvas>
+    <div class="s-bottom">
+      <div class="s-identity">
+        <span class="s-num">(03) — Tight</span>
+        <h2 class="s-name" style="color:rgb(148,192,240)">STEEL</h2>
+        <span class="s-desc">Near-maximum tension — fast wave, quick muted decay</span>
+      </div>
+      <div class="params">
+        <div class="params-label">— parameters —</div>
+        <div class="p-row"><span class="p-key">TENSION</span>   <span class="p-val" style="color:rgb(148,192,240)">0.48</span>  <span class="p-note">↑ near-max wave speed</span></div>
+        <div class="p-row"><span class="p-key">DAMPING</span>   <span class="p-val" style="color:rgb(148,192,240)">0.974</span> <span class="p-note">↓ decays fast, muted</span></div>
+        <div class="p-row"><span class="p-key">AMPLITUDE</span> <span class="p-val" style="color:rgb(148,192,240)">13 px</span> <span class="p-note">↓ tight small displacement</span></div>
+        <div class="p-row"><span class="p-key">PLK WIDTH</span> <span class="p-val" style="color:rgb(148,192,240)">0.08</span>  <span class="p-note">↓ high harmonics, short waves</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       04 — ELASTIC  (rubber band, lossless)
+  ════════════════════════════════════════ -->
+  <section class="s-section" id="s4">
+    <canvas class="s-canvas" aria-hidden="true"></canvas>
+    <div class="s-bottom">
+      <div class="s-identity">
+        <span class="s-num">(04) — Bouncy</span>
+        <h2 class="s-name" style="color:rgb(92,198,158)">ELASTIC</h2>
+        <span class="s-desc">Rubber band physics — slow wave, barely loses energy</span>
+      </div>
+      <div class="params">
+        <div class="params-label">— parameters —</div>
+        <div class="p-row"><span class="p-key">TENSION</span>   <span class="p-val" style="color:rgb(92,198,158)">0.20</span>  <span class="p-note">↓ slow, elastic wave</span></div>
+        <div class="p-row"><span class="p-key">DAMPING</span>   <span class="p-val" style="color:rgb(92,198,158)">0.9997</span><span class="p-note">↑ nearly lossless, rings forever</span></div>
+        <div class="p-row"><span class="p-key">AMPLITUDE</span> <span class="p-val" style="color:rgb(92,198,158)">34 px</span> <span class="p-note">↑ big stretch</span></div>
+        <div class="p-row"><span class="p-key">PLK WIDTH</span> <span class="p-val" style="color:rgb(92,198,158)">0.30</span>  <span class="p-note">↑ smooth wide arc</span></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
